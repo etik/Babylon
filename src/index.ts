@@ -1,3 +1,5 @@
+// npm run webserver   npm run watch
+
 module BABYLON {
     export class Main {
         // Public members
@@ -41,7 +43,7 @@ module BABYLON {
             });
 
             // Skybox
-            this.skybox = Mesh.CreateBox("skybox", 1000, this.scene, false, Mesh.BACKSIDE);
+            this.skybox = Mesh.CreateBox("skybox", 10000, this.scene, false, Mesh.BACKSIDE);
 
             var skyboxMaterial = new StandardMaterial("skyboxMaterial", this.scene);
             skyboxMaterial.reflectionTexture = new CubeTexture("assets/TropicalSunnyDay", this.scene);
@@ -72,16 +74,28 @@ module BABYLON {
             // Dude
             BABYLON.SceneLoader.ImportMesh("", "./scenes/", "alduin-dragon.babylon", this.scene, function (newMeshes) {
 
-                var dragon = newMeshes[0];
+                let dragon = newMeshes[0];
                 
                 //for (var index = 0; index < newMeshes.length; index++) {
                 //    this.shadowGenerator.getShadowMap().renderList.push(newMeshes[index]);
                 //}
                 dragon.rotation.y = 0;
+                dragon.scaling = new Vector3(0.1, 0.1, 0.1);
                 // (Math.PI);
                 dragon.position = new BABYLON.Vector3(0, 0, -80);
                    
                 //this.scene.beginAnimation(newMeshes[0], 0, 100, true, 1.0);
+            });
+
+            BABYLON.SceneLoader.ImportMesh("", "./scenes/", "Girl.babylon", this.scene, function (newMeshes2) {
+
+                let loli = newMeshes2[0];
+                
+                loli.rotation.y = Math.PI;
+                loli.scaling = new Vector3(2, 2, 2);
+            
+                loli.position = new BABYLON.Vector3(100, 20, 0);
+
             });
 
             const diffuse = new Texture('./assets/diffuse.png', this.scene);

@@ -1,3 +1,4 @@
+// npm run webserver   npm run watch
 var BABYLON;
 (function (BABYLON) {
     var Main = /** @class */ (function () {
@@ -27,7 +28,7 @@ var BABYLON;
                 friction: 0.5
             });
             // Skybox
-            this.skybox = BABYLON.Mesh.CreateBox("skybox", 1000, this.scene, false, BABYLON.Mesh.BACKSIDE);
+            this.skybox = BABYLON.Mesh.CreateBox("skybox", 10000, this.scene, false, BABYLON.Mesh.BACKSIDE);
             var skyboxMaterial = new BABYLON.StandardMaterial("skyboxMaterial", this.scene);
             skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture("assets/TropicalSunnyDay", this.scene);
             skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
@@ -56,9 +57,16 @@ var BABYLON;
                 //    this.shadowGenerator.getShadowMap().renderList.push(newMeshes[index]);
                 //}
                 dragon.rotation.y = 0;
+                dragon.scaling = new BABYLON.Vector3(0.1, 0.1, 0.1);
                 // (Math.PI);
                 dragon.position = new BABYLON.Vector3(0, 0, -80);
                 //this.scene.beginAnimation(newMeshes[0], 0, 100, true, 1.0);
+            });
+            BABYLON.SceneLoader.ImportMesh("", "./scenes/", "Girl.babylon", this.scene, function (newMeshes2) {
+                var loli = newMeshes2[0];
+                loli.rotation.y = Math.PI;
+                loli.scaling = new BABYLON.Vector3(2, 2, 2);
+                loli.position = new BABYLON.Vector3(100, 20, 0);
             });
             var diffuse = new BABYLON.Texture('./assets/diffuse.png', this.scene);
             var normal = new BABYLON.Texture('./assets/normal.png', this.scene);
